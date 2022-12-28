@@ -2,7 +2,7 @@
 
 namespace mt
 {
-	Race::~Race()
+	Race::~Race() // Деструктор
 	{
 		if (m_window != nullptr)
 		{
@@ -10,11 +10,13 @@ namespace mt
 		}
 	}
 
+    // Заголовок окна
 	void Race::SetCaption(const std::string& caption)
 	{
 		m_caption = caption;
 	}
 
+    // Разрешение окна
 	void Race::SetResolution(int width, int height)
 	{
 		m_width = width;
@@ -24,13 +26,13 @@ namespace mt
 	void Race::Setup()
 	{
 		m_window = new sf::RenderWindow(sf::VideoMode(m_width, m_height), m_caption);
+
+        // Подключение вертикальной синхронизации для оптимального значения кадров в секунду
+        m_window->setVerticalSyncEnabled(true);
 	}
 
 	void Race::Run()
 	{
-        // Подключение вертикальной синхронизации для оптимального значения кадров в секунду
-        m_window->setVerticalSyncEnabled(true);
-
         // Создание машины
         sf::RectangleShape car1(sf::Vector2f(100, 100));
         car1.setPosition(120, 100);
@@ -61,17 +63,11 @@ namespace mt
         road4.setFillColor(sf::Color::Black);
         road4.setPosition(100, 700);
 
+        // Скорость машины
         int speed = 5;
-
-        sf::Clock clock;
 
         while (m_window->isOpen())
         {
-
-            float time = clock.getElapsedTime().asMicroseconds();
-            clock.restart();
-            time = time / 800;
-
             sf::Event event;
             while (m_window->pollEvent(event))
             {
@@ -79,6 +75,7 @@ namespace mt
                     m_window->close();
             }
 
+            // Движение машины через кнопки WASD или стрелочки
             if ((sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) || (sf::Keyboard::isKeyPressed(sf::Keyboard::A)))
             {
                 car1.move(-speed, 0);
@@ -100,6 +97,7 @@ namespace mt
                 car1.setRotation(90.0f);
             }
 
+            // Отрисовка всех объектов на экране
             m_window->clear();
             m_window->draw(grass);
             m_window->draw(road1);

@@ -3,7 +3,7 @@
 #include <iostream>
 #include <string>
 
-namespace mt
+namespace mt // Вводим пространство имён, чтобы наши классы или функции не пересекались с уже существующими
 {
 	class Race
 	{
@@ -13,15 +13,15 @@ namespace mt
 		sf::RenderWindow* m_window = nullptr;
 
 	public:
-		Race()
+		Race() // Конструктор
 		{
 		}
 
-		~Race();
+		~Race(); // Деструктор
 
-		void SetCaption(const std::string& caption);
-		void SetResolution(int width, int height);
-		void Setup();
-		void Run();
+		void SetCaption(const std::string& caption); // Заголовок экрана
+		void SetResolution(int width, int height); // Разрешение экрана
+		void Setup(); // В нём хранится окно и параметры окна
+		void Run(); // В нём происходит весь игровой процесс
 	};
 }
